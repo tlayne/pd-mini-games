@@ -16,6 +16,7 @@ function Player:init(x, y)
  
    self.speed = 4
 end
+
  
 -- Runs every time the playdate refreshes, constantly checking if a button is being presssed (multiple can be pressed at once)
 function Player:update()
@@ -41,6 +42,25 @@ function Player:update()
        end
    end
    if pd.buttonJustPressed(pd.kButtonA) then
-        Projectile(self.x, self.y - 15, 5)
+        local projectileActive = projectileLimit()
+        if (projectileActive < 4) then
+            Projectile(self.x, self.y - 15, 5)
+        end
    end
+end
+
+function resetPlayer()
+    
+    stopEnemySpawner()
+    clearSprites()
+    shipPower = 0
+    
+    padTimer = pd.timer.performAfterDelay(1200, function()
+        if (lifeCount >= 0) then
+            lifeCount = lifeCount - 1
+            setGameScene()
+        else
+            setGameOverScene()
+        end
+    end)
 end

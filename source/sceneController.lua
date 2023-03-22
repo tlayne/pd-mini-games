@@ -42,6 +42,7 @@ function setBackground(imageName)
 
  function setGameOverScene()
     gameState = 'game over'
+    lifeCount = 2
     clearSprites()
 
     stopEnemySpawner()

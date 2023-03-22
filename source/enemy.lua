@@ -1,3 +1,5 @@
+import 'player'
+
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
@@ -9,7 +11,7 @@ function Enemy:init(x, y, speed, direction)
 
     self:setImage(enemyImage)
     self:moveTo(x, y)
-    self:setCollideRect(8, 8, 16, 16)
+    self:setCollideRect(0, 0, 16, 16)
     self.speed = speed
     self.direction = direction
     self:add()
@@ -25,17 +27,21 @@ function Enemy:update()
 
             if collidedObject:isa(Player) then
                 self:remove()
-                -- reset player function will go here
+                collidedObject:remove()
+                resetPlayer()
             end
         end
     end
 
+
     -- avoid walls
     if (self.x >= 384) then
+
         self.direction = math.random(-3,0)
     end
 
     if (self.x <= 16) then
+
         self.direction = math.random(0,3)
     end
     -- remove enemies from off screen

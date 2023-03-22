@@ -27,6 +27,8 @@ function Projectile:update()
 
             if collidedObject:isa(Enemy) then
                 collidedObject:remove()
+                incrementScore()
+                shipPower = shipPower + 1
             end
         end
         self:remove()
@@ -35,4 +37,15 @@ function Projectile:update()
     end
 end
 
--- need to clear projectiles when they go off screen at some point
+function projectileLimit()
+    local projectileActive = 0
+    local allSprites = gfx.sprite.getAllSprites()
+    
+    for index, sprite in ipairs(allSprites) do
+        if sprite:isa(Projectile) then
+            projectileActive = projectileActive + 1
+        end
+    end
+
+    return projectileActive
+end

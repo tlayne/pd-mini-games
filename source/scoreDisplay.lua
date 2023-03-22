@@ -16,7 +16,6 @@ function updateDisplay()
     local scoreImage = gfx.image.new(textWidth, textHeight)
     gfx.pushContext(scoreImage)
         gfx.drawText(scoreText, 0, 0)
-        gfx.setImageDrawMode('fillWhite')
     gfx.popContext()
     scoreSprite:setImage(scoreImage)
 end
