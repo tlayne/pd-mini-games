@@ -52,13 +52,13 @@ end
 function resetPlayer()
     
     stopEnemySpawner()
-    clearSprites()
     shipPower = 0
-    
+    loseLife()
+
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
-            lifeCount = lifeCount - 1
-            setGameScene()
+            Player(200, 180)
+            startEnemySpawner()
         else
             setGameOverScene()
         end

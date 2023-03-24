@@ -35,6 +35,7 @@ function setBackground(imageName)
     gameState = 'game'
     clearSprites()
     createScoreDisplay()
+    createLifeDisplay()
     Player(200, 180)
     startEnemySpawner()
     setBackground('background')

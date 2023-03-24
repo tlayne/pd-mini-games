@@ -8,6 +8,7 @@ import "playGameButton"
 import "player"
 import "enemySpawner"
 import "scoreDisplay"
+import "lifeDisplay"
 
 
 local pd <const> = playdate
@@ -17,6 +18,7 @@ setStartingScene()
 
 function resetGame()
     resetScore()
+    resetLife()
     clearEnemies()
     stopEnemySpawner()
     startEnemySpawner()
