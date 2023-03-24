@@ -7,11 +7,12 @@ class('Player').extends(AnimatedSprite)
  
 -- Instantiates the Player
 function Player:init(x, y)
-    local playerTable = gfx.imagetable.new("images/player-table-32-32")
+    local playerTable = gfx.imagetable.new("images/deprecated/player-table-32-32")
     -- Set image table to the sprite
     Player.super.init(self, playerTable)
 
-    self:addState("idle", 1, 3, {tickStep = 2})
+    self:addState("idle", 12, 14, {tickStep = 2})
+    self:addState("roll", 1, 11, {tickStep = 4})
     self:playAnimation()
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 30)
@@ -51,7 +52,15 @@ function Player:update()
             Projectile(self.x, self.y - 18, 5)
         end
    end
+   function pd.cranked(change, acceleratedChange)
+        if change > 1 then
+            self.currentState = "roll"
+        else 
+            self.currentState = "idle"
+        end
+   end
 end
+
 
 function resetPlayer()
     

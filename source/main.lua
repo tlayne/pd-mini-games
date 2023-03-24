@@ -11,6 +11,7 @@ import "player"
 import "enemySpawner"
 import "scoreDisplay"
 import "lifeDisplay"
+import "CoreLibs/crank"
 
 
 local pd <const> = playdate
