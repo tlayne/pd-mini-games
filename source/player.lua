@@ -12,7 +12,9 @@ function Player:init(x, y)
     Player.super.init(self, playerTable)
 
     self:addState("idle", 12, 14, {tickStep = 2})
-    self:addState("roll", 1, 11, {tickStep = 4})
+    self:addState("bankLeft", 11, 11)
+    self:addState("bankRight", 1, 1)
+    self:addState("roll", 1, 11, {tickStep = 2})
     self:playAnimation()
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 30)
@@ -33,6 +35,7 @@ function Player:update()
    end
    if playdate.buttonIsPressed( playdate.kButtonRight ) then
        if (self.x < 384) then
+            self:changeState("bankRight")
            self:moveBy( self.speed * shipSpeedMultiplier, 0 )
        end
    end
@@ -43,6 +46,7 @@ function Player:update()
    end
    if playdate.buttonIsPressed( playdate.kButtonLeft ) then
        if (self.x > 16) then
+            self:changeState("bankLeft")
            self:moveBy( -self.speed * shipSpeedMultiplier, 0 )
        end
    end
@@ -52,11 +56,18 @@ function Player:update()
             Projectile(self.x, self.y - 18, 5)
         end
    end
+
+   if pd.buttonJustReleased(playdate.kButtonLeft) then
+    self:changeState("idle")
+   end
+   if pd.buttonJustReleased(playdate.kButtonRight) then
+    self:changeState("idle")
+   end
    function pd.cranked(change, acceleratedChange)
         if change > 1 then
-            self.currentState = "roll"
-        else 
-            self.currentState = "idle"
+            self:changeState("roll")
+        else
+            self:changeState("idle")
         end
    end
 end
