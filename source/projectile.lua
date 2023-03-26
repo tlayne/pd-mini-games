@@ -29,6 +29,12 @@ function Projectile:update()
                 collidedObject:remove()
                 incrementScore()
                 shipPower = shipPower + 1
+                if (shipPower == 5 or shipPower == 10 or shipPower == 20) then
+                    setCrankUI(true)
+                    padTimer = pd.timer.performAfterDelay(3600, function()
+                        setCrankUI(false)
+                    end)
+                end
             end
         end
         self:remove()

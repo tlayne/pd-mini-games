@@ -14,7 +14,7 @@ function Player:init(x, y)
     self:addState("idle", 12, 14, {tickStep = 2})
     self:addState("bankLeft", 11, 11)
     self:addState("bankRight", 1, 1)
-    self:addState("roll", 1, 11, {tickStep = 2})
+    self:addState("roll", 1, 11, {tickStep = 2, nextAnimation = 'idle'})
     self:playAnimation()
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 30)
@@ -66,8 +66,7 @@ function Player:update()
    function pd.cranked(change, acceleratedChange)
         if change > 1 then
             self:changeState("roll")
-        else
-            self:changeState("idle")
+            powerDisplayUpdate()
         end
    end
 end
@@ -76,9 +75,10 @@ end
 function resetPlayer()
     
     stopEnemySpawner()
-    shipPower = 0
+    resetPower()
     loseLife()
-
+    setCrankUI(false)
+    
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
             Player(200, 180)

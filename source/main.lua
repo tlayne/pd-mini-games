@@ -1,5 +1,6 @@
 import "CoreLibs/object"
 import "CoreLibs/graphics"
+import "CoreLibs/ui"
 import "CoreLibs/sprites"
 import "CoreLibs/timer"
 import "CoreLibs/animation"
@@ -12,6 +13,7 @@ import "enemySpawner"
 import "scoreDisplay"
 import "lifeDisplay"
 import "CoreLibs/crank"
+import "powerUp"
 
 
 local pd <const> = playdate
@@ -22,9 +24,17 @@ setStartingScene()
 function resetGame()
     resetScore()
     resetLife()
+    resetPower()
     clearEnemies()
     stopEnemySpawner()
     startEnemySpawner()
+end
+
+function setCrankUI(boo)
+    crankStat = boo
+    if crankStat == true then
+        pd.ui.crankIndicator:start()
+    end
 end
 
 function pd.update()
@@ -32,4 +42,7 @@ function pd.update()
     gfx.sprite.update()
     pd.timer.updateTimers()
 
+    if crankStat == true then
+        pd.ui.crankIndicator:update()
+    end
 end
