@@ -1,4 +1,5 @@
 import "projectile"
+import "laser"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -7,14 +8,15 @@ class('Player').extends(AnimatedSprite)
  
 -- Instantiates the Player
 function Player:init(x, y)
-    local playerTable = gfx.imagetable.new("images/deprecated/player-table-32-32")
+    local playerTable = gfx.imagetable.new("images/player-table-32-32")
     -- Set image table to the sprite
     Player.super.init(self, playerTable)
 
-    self:addState("idle", 12, 14, {tickStep = 2})
-    self:addState("bankLeft", 11, 11)
-    self:addState("bankRight", 1, 1)
-    self:addState("roll", 1, 11, {tickStep = 2, nextAnimation = 'idle'})
+    self:addState("idle", 1, 3, {tickStep = 2})
+    self:addState("bankLeft", 14, 14)
+    self:addState("bankRight", 4, 4)
+    self:addState("roll", 4, 14, {tickStep = 2, nextAnimation = 'idle'})
+    self:addState("dead", 15, 21, {tickStep = 2, })
     self:playAnimation()
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 30)
@@ -51,9 +53,21 @@ function Player:update()
        end
    end
    if pd.buttonJustPressed(pd.kButtonA) then
-        local projectileActive = projectileLimit()
-        if (projectileActive < 4) then
+        projectileActive = projectileLimit()
+        laserActive = laserLimit()
+
+        if (powerLevel == "stage1" and projectileActive < 1) then
             Projectile(self.x, self.y - 18, 5)
+        elseif (powerLevel == "stage2" and projectileActive < 4) then
+            Projectile(self.x, self.y - 18, 5)
+        elseif (powerLevel == "stage3" and laserActive < 6 and projectileActive < 4) then
+            Projectile(self.x, self.y - 18, 5)
+            Laser(self.x - 12, self.y - 6, 6, -3)
+            Laser(self.x + 12, self.y - 6, 6, 3)
+        elseif (powerLevel == "stage4" and laserActive < 8 and projectileActive < 6) then
+            Projectile(self.x, self.y - 18, 5)
+            Laser(self.x - 12, self.y - 6, 6, -3)
+            Laser(self.x + 12, self.y - 6, 6, 3)
         end
    end
 
@@ -78,7 +92,7 @@ function resetPlayer()
     resetPower()
     loseLife()
     setCrankUI(false)
-    
+
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
             Player(200, 180)

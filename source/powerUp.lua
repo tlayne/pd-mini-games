@@ -36,21 +36,39 @@ end
 
 function resetPower()
     shipPower = 0
+    powerLevel = "stage1"
     powerSprite2:remove()
     powerSprite3:remove()
     powerSprite4:remove()
 end 
 
+function increasePower()
+    if (powerLevel == "stage1") then
+        powerLevel = "stage2"
+    elseif (powerLevel == "stage2") then
+        powerLevel = "stage3"
+    elseif (powerLeve == "stage3") then
+        powerLevel = "stage4"
+    else
+        if (bombCount == 0) then
+            bombCount += 1
+        end
+    end
+end
+
 -- resetPower in the loselife function from lifedisplay
 function powerDisplayUpdate()
     if (shipPower >= 5 and shipPower < 10) then
+        powerLevel = "stage2"
         powerSprite2:add()
         setCrankUI(false)
     elseif (shipPower >= 10 and shipPower < 20) then
+        powerLevel = "stage3"
         powerSprite2:remove()
         powerSprite3:add()
         setCrankUI(false)
     elseif (shipPower >= 20) then
+        powerLevel = "stage4"
         powerSprite3:remove()
         powerSprite4:add()
         setCrankUI(false)

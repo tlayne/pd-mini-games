@@ -27,7 +27,10 @@ function Enemy:update()
 
             if collidedObject:isa(Player) then
                 self:remove()
+                collidedObject:changeState("dead")
+                splodeTimer = pd.timer.performAfterDelay(300, function()
                 collidedObject:remove()
+                end)
                 resetPlayer()
             end
         end

@@ -1,24 +1,24 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('Projectile').extends(gfx.sprite)
+class('Laser').extends(gfx.sprite)
 
-function Projectile:init(x, y, speed)
-    local projectileSize = 2
-    local projectileImage = gfx.image.new(projectileSize * 2, projectileSize * 2)
-    gfx.pushContext(projectileImage)
-        gfx.drawCircleAtPoint(projectileSize, projectileSize, projectileSize)
-    gfx.popContext(projectileImage)
-    self:setImage(projectileImage)
+function Laser:init(x, y, speed, direction)
+    local laserImage = gfx.image.new(2,5)
+    gfx.pushContext(laserImage)
+        gfx.drawRect(0,0,2,5)
+    gfx.popContext(laserImage)
+    self:setImage(laserImage)
 
     self:setCollideRect(0,0, self:getSize())
     self.speed = speed
+    self.direction = direction
     self:moveTo(x, y)
     self:add()
 end
 
-function Projectile:update()
-    local actualX, actualY, collisions, length = self:moveWithCollisions(self.x, self.y - self.speed)
+function Laser:update()
+    local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.direction, self.y - self.speed)
     
     -- Collision Logic
     if length > 0 then
@@ -43,16 +43,15 @@ function Projectile:update()
     end
 end
 
-function projectileLimit()
-    local projectileActive = 0
+function laserLimit()
+    local laserActive = 0
     local allSprites = gfx.sprite.getAllSprites()
     
     for index, sprite in ipairs(allSprites) do
-        if sprite:isa(Projectile) then
-            projectileActive = projectileActive + 1
+        if sprite:isa(Laser) then
+            laserActive = laserActive + 1
         end
     end
 
-    return projectileActive
+    return laserActive
 end
-

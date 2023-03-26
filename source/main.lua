@@ -28,6 +28,7 @@ function resetGame()
     clearEnemies()
     stopEnemySpawner()
     startEnemySpawner()
+    bombCount = 0
 end
 
 function setCrankUI(boo)
