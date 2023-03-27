@@ -11,7 +11,7 @@ function Enemy:init(x, y, speed, direction)
 
     self:setImage(enemyImage)
     self:moveTo(x, y)
-    self:setCollideRect(0, 0, 16, 16)
+    self:setCollideRect(0, 0, 14, 14)
     self.speed = speed
     self.direction = direction
     self:add()

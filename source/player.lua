@@ -1,5 +1,4 @@
 import "projectile"
-import "laser"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -54,20 +53,20 @@ function Player:update()
    end
    if pd.buttonJustPressed(pd.kButtonA) then
         projectileActive = projectileLimit()
-        laserActive = laserLimit()
 
-        if (powerLevel == "stage1" and projectileActive < 1) then
-            Projectile(self.x, self.y - 18, 5)
-        elseif (powerLevel == "stage2" and projectileActive < 4) then
-            Projectile(self.x, self.y - 18, 5)
-        elseif (powerLevel == "stage3" and laserActive < 6 and projectileActive < 4) then
-            Projectile(self.x, self.y - 18, 5)
-            Laser(self.x - 12, self.y - 6, 6, -3)
-            Laser(self.x + 12, self.y - 6, 6, 3)
-        elseif (powerLevel == "stage4" and laserActive < 8 and projectileActive < 6) then
-            Projectile(self.x, self.y - 18, 5)
-            Laser(self.x - 12, self.y - 6, 6, -3)
-            Laser(self.x + 12, self.y - 6, 6, 3)
+        if (powerLevel == "stage1" and projectileActive < 3) then
+            Projectile(self.x, self.y - 18, 5, 0)
+        elseif (powerLevel == "stage2" and projectileActive < 6) then
+            Projectile(self.x - 15, self.y - 6, 6, 0)
+            Projectile(self.x + 15, self.y - 6, 6, 0)
+        elseif (powerLevel == "stage3" and projectileActive < 9) then
+            Projectile(self.x, self.y - 18, 5, 0)
+            Projectile(self.x - 15, self.y - 6, 6, 0)
+            Projectile(self.x + 15, self.y - 6, 6, 0)
+        elseif (powerLevel == "stage4" and projectileActive < 12) then
+            Projectile(self.x, self.y - 18, 5, 0)
+            Projectile(self.x - 15, self.y - 6, 6, -3)
+            Projectile(self.x + 15, self.y - 6, 6, 3)
         end
    end
 
@@ -101,4 +100,8 @@ function resetPlayer()
             setGameOverScene()
         end
     end)
+end
+
+function Player:collisionResponse()
+    return 'overlap'
 end

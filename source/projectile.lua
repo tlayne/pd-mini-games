@@ -3,7 +3,7 @@ local gfx <const> = pd.graphics
 
 class('Projectile').extends(gfx.sprite)
 
-function Projectile:init(x, y, speed)
+function Projectile:init(x, y, speed, direction)
     local projectileSize = 2
     local projectileImage = gfx.image.new(projectileSize * 2, projectileSize * 2)
     gfx.pushContext(projectileImage)
@@ -12,13 +12,14 @@ function Projectile:init(x, y, speed)
     self:setImage(projectileImage)
 
     self:setCollideRect(0,0, self:getSize())
+    self.direction = direction
     self.speed = speed
     self:moveTo(x, y)
     self:add()
 end
 
 function Projectile:update()
-    local actualX, actualY, collisions, length = self:moveWithCollisions(self.x, self.y - self.speed)
+    local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.direction, self.y - self.speed)
     
     -- Collision Logic
     if length > 0 then
@@ -27,6 +28,7 @@ function Projectile:update()
 
             if collidedObject:isa(Enemy) then
                 collidedObject:remove()
+                self:remove()
                 incrementScore()
                 shipPower = shipPower + 1
                 if (shipPower == 5 or shipPower == 10 or shipPower == 20) then
@@ -37,7 +39,6 @@ function Projectile:update()
                 end
             end
         end
-        self:remove()
     elseif (self.y < 0) then
         self:remove()
     end
@@ -56,3 +57,6 @@ function projectileLimit()
     return projectileActive
 end
 
+function Projectile:collisionResponse()
+    return 'overlap'
+end
