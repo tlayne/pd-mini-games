@@ -112,6 +112,7 @@ end
 
 function resetPlayer(playerReference)
     disableInput()
+    wyverWav:stop()
     splod:play()
     --playerReference:changeState("dead")
     playerReference:forceNextAnimation(true, "dead")

@@ -28,6 +28,7 @@ function resetGame()
     clearEnemies()
     stopEnemySpawner()
     startEnemySpawner()
+    enableInput()
     bombCount = 0
 end
 

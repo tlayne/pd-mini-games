@@ -40,7 +40,10 @@ function Projectile:update()
                 end
             end
         end
-    elseif (self.y < 0) then
+    end
+
+    -- remove projectiles from off screen
+    if (self.y < 0) then
         self:remove()
     end
 end

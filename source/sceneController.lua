@@ -44,6 +44,7 @@ function setBackground(imageName)
     gameState = 'game'
     clearSprites()
     loadSounds()
+    loadMusic()
     createScoreDisplay()
     createLifeDisplay()
     createPowerDisplay()

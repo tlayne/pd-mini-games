@@ -20,4 +20,9 @@ function loadSounds()
 end
 
 
-
+function loadMusic()
+    wyverWav= sd.fileplayer.new("sounds/wyver9")
+    wyverWav:load("sounds/wyver9")
+    wyverWav:setVolume(0.4)
+    wyverWav:play(0)
+end

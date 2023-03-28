@@ -27,10 +27,6 @@ function Enemy:update()
 
             if collidedObject:isa(Player) then
                 resetPlayer(collidedObject)
---  collidedObject:changeState("dead")
---  splodeTimer = pd.timer.performAfterDelay(300, function()
---  collidedObject:remove()
---  end)
             end
         end
     end
@@ -51,6 +47,19 @@ function Enemy:update()
         self:remove()
     end
 end
+
+-- check if enemy is on screen
+-- experimental and not used currently
+--function screenEnemies()
+--    local allSprites = gfx.sprite.getAllSprites()
+--    for index, sprite in ipairs(allSprites) do
+--        if sprite:isa(Enemy) then
+--            if sprite.y > -10 then
+--                return true
+--            end
+--        end
+--    end
+-- end
 
 -- enemy collisions are overlapping currently but may want to bounce off each other
 function Enemy:collisionResponse()
