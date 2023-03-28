@@ -87,10 +87,11 @@ function powerDisplayUpdate()
         powerSprite3:remove()
         powerSprite4:add()
         setCrankUI(false)
+    -- This triggers repeatedly upon reaching 40+ need to limit it somehow
     elseif (shipPower >= 40 and powerLevel == "stage4") then
-        spin:play()
         if (bombCount == 0) then
             bombCount += 1
+            spin:play()
             bombSprite:add()
         end
     end

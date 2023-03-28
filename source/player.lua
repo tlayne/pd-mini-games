@@ -16,6 +16,7 @@ function Player:init(x, y)
     self:addState("bankRight", 4, 4)
     self:addState("roll", 4, 14, {tickStep = 2, nextAnimation = 'idle'})
     self:addState("dead", 15, 21, {tickStep = 2, })
+    self:setDefaultState('idle')
     self:playAnimation()
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 30)
@@ -28,7 +29,8 @@ end
 -- Runs every time the playdate refreshes, constantly checking if a button is being presssed (multiple can be pressed at once)
 function Player:update()
     self:updateAnimation()
-   -- Allow player movement with the D-pad
+-- Allow player movement with the D-pad if inputEnabled is true
+if (inputEnabled == true) then
    if playdate.buttonIsPressed( playdate.kButtonUp ) then
        if (self.y > 160) then
            self:moveBy( 0, -self.speed * shipSpeedMultiplier )
@@ -36,7 +38,6 @@ function Player:update()
    end
    if playdate.buttonIsPressed( playdate.kButtonRight ) then
        if (self.x < 384) then
-            self:changeState("bankRight")
            self:moveBy( self.speed * shipSpeedMultiplier, 0 )
        end
    end
@@ -47,7 +48,6 @@ function Player:update()
    end
    if playdate.buttonIsPressed( playdate.kButtonLeft ) then
        if (self.x > 16) then
-            self:changeState("bankLeft")
            self:moveBy( -self.speed * shipSpeedMultiplier, 0 )
        end
    end
@@ -87,18 +87,34 @@ function Player:update()
    if pd.buttonJustReleased(playdate.kButtonRight) then
     self:changeState("idle")
    end
+   if pd.buttonJustPressed(playdate.kButtonLeft) then
+    self:changeState("bankLeft")
+   end
+   if pd.buttonJustPressed(playdate.kButtonRight) then
+    self:changeState("bankRight")
+   end
    function pd.cranked(change, acceleratedChange)
-        if change > 1 then
+        if change > 20 then
             self:changeState("roll")
             powerDisplayUpdate()
         end
    end
 end
+end
 
+function enableInput()
+    inputEnabled = true
+end
+
+function disableInput()
+    inputEnabled = false
+end
 
 function resetPlayer(playerReference)
+    disableInput()
     splod:play()
-    playerReference:changeState("dead")
+    --playerReference:changeState("dead")
+    playerReference:forceNextAnimation(true, "dead")
     
     splodeTimer = pd.timer.performAfterDelay(300, function()
         playerReference:remove()
@@ -112,6 +128,7 @@ function resetPlayer(playerReference)
 
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
+            enableInput()
             Player(200, 180)
             startEnemySpawner()
         else

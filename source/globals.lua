@@ -8,4 +8,5 @@ powerLevel = "stage1"
 bombCount = 0
 score = 0
 crankStat = false
+inputEnabled = true
 

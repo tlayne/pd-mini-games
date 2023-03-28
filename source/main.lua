@@ -42,6 +42,7 @@ function pd.update()
 
     gfx.sprite.update()
     pd.timer.updateTimers()
+    pd.setCrankSoundsDisabled(true)
 
     if crankStat == true then
         pd.ui.crankIndicator:update()
