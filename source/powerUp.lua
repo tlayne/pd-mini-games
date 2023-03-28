@@ -5,6 +5,7 @@ local powerSprite1
 local powerSprite2
 local powerSprite3
 local powerSprite4
+local bombSprite
 
 function createPowerDisplay()
     
@@ -32,6 +33,17 @@ function createPowerDisplay()
     powerSprite4:setCenter(0, 0)
     powerSprite4:moveTo(30, 230)
 
+    bombImage = gfx.image.new('images/bomb')
+    bombSprite = gfx.sprite.new()
+    bombSprite:setImage(bombImage)
+    bombSprite:setCenter(0, 0)
+    bombSprite:moveTo(50, 230)
+end
+
+function useBomb()
+    clearEnemies()
+    bombSprite:remove()
+    bombCount = 0
 end
 
 function resetPower()
@@ -59,18 +71,27 @@ end
 -- resetPower in the loselife function from lifedisplay
 function powerDisplayUpdate()
     if (shipPower >= 5 and shipPower < 10) then
+        spin:play()
         powerLevel = "stage2"
         powerSprite2:add()
         setCrankUI(false)
     elseif (shipPower >= 10 and shipPower < 20) then
+        spin:play()
         powerLevel = "stage3"
         powerSprite2:remove()
         powerSprite3:add()
         setCrankUI(false)
-    elseif (shipPower >= 20) then
+    elseif (shipPower >= 20 and powerLevel ~= "stage4") then
+        spin:play()
         powerLevel = "stage4"
         powerSprite3:remove()
         powerSprite4:add()
         setCrankUI(false)
+    elseif (shipPower >= 40 and powerLevel == "stage4") then
+        spin:play()
+        if (bombCount == 0) then
+            bombCount += 1
+            bombSprite:add()
+        end
     end
 end

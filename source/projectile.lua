@@ -27,13 +27,14 @@ function Projectile:update()
             local collidedObject = collision['other']
 
             if collidedObject:isa(Enemy) then
+                kill:play()
                 collidedObject:remove()
                 self:remove()
                 incrementScore()
                 shipPower = shipPower + 1
-                if (shipPower == 5 or shipPower == 10 or shipPower == 20) then
+                if (shipPower == 5 or shipPower == 10 or shipPower == 20 or shipPower == 40) then
                     setCrankUI(true)
-                    crankyTimer = pd.timer.performAfterDelay(3600, function()
+                    crankyTimer = pd.timer.performAfterDelay(4200, function()
                         setCrankUI(false)
                     end)
                 end

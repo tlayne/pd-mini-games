@@ -11,7 +11,7 @@ function Enemy:init(x, y, speed, direction)
 
     self:setImage(enemyImage)
     self:moveTo(x, y)
-    self:setCollideRect(0, 0, 14, 14)
+    self:setCollideRect(2, 2, 12, 12)
     self.speed = speed
     self.direction = direction
     self:add()
@@ -26,12 +26,11 @@ function Enemy:update()
             local collidedObject = collision['other']
 
             if collidedObject:isa(Player) then
-                self:remove()
-                collidedObject:changeState("dead")
-                splodeTimer = pd.timer.performAfterDelay(300, function()
-                collidedObject:remove()
-                end)
-                resetPlayer()
+                resetPlayer(collidedObject)
+--  collidedObject:changeState("dead")
+--  splodeTimer = pd.timer.performAfterDelay(300, function()
+--  collidedObject:remove()
+--  end)
             end
         end
     end

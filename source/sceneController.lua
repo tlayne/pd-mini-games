@@ -9,6 +9,15 @@ function clearSprites()
     end
  end
 
+ function clearEnemies()
+    local allSprites = gfx.sprite.getAllSprites()
+    for index, sprite in ipairs(allSprites) do
+        if sprite:isa(Enemy) then
+            sprite:remove()
+        end
+    end
+ end
+
  -- Sets the background image
 function setBackground(imageName)
     -- Display a background image
@@ -34,6 +43,7 @@ function setBackground(imageName)
  function setGameScene()
     gameState = 'game'
     clearSprites()
+    loadSounds()
     createScoreDisplay()
     createLifeDisplay()
     createPowerDisplay()

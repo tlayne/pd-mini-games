@@ -14,7 +14,7 @@ import "scoreDisplay"
 import "lifeDisplay"
 import "CoreLibs/crank"
 import "powerUp"
-
+import "soundController"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

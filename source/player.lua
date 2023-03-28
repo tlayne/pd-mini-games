@@ -55,18 +55,29 @@ function Player:update()
         projectileActive = projectileLimit()
 
         if (powerLevel == "stage1" and projectileActive < 3) then
+            laser:play()
             Projectile(self.x, self.y - 18, 5, 0)
         elseif (powerLevel == "stage2" and projectileActive < 6) then
+            laser:play()
             Projectile(self.x - 15, self.y - 6, 6, 0)
             Projectile(self.x + 15, self.y - 6, 6, 0)
         elseif (powerLevel == "stage3" and projectileActive < 9) then
+            laser:play()
             Projectile(self.x, self.y - 18, 5, 0)
             Projectile(self.x - 15, self.y - 6, 6, 0)
             Projectile(self.x + 15, self.y - 6, 6, 0)
         elseif (powerLevel == "stage4" and projectileActive < 12) then
+            laser:play()
             Projectile(self.x, self.y - 18, 5, 0)
-            Projectile(self.x - 15, self.y - 6, 6, -3)
-            Projectile(self.x + 15, self.y - 6, 6, 3)
+            Projectile(self.x - 15, self.y - 6, 6, -1)
+            Projectile(self.x + 15, self.y - 6, 6, 1)
+        end
+   end
+
+   if pd.buttonJustPressed(pd.kButtonB) then
+        if (bombCount == 1) then
+            sonic:play()
+            useBomb()
         end
    end
 
@@ -85,9 +96,16 @@ function Player:update()
 end
 
 
-function resetPlayer()
+function resetPlayer(playerReference)
+    splod:play()
+    playerReference:changeState("dead")
+    
+    splodeTimer = pd.timer.performAfterDelay(300, function()
+        playerReference:remove()
+    end)
     
     stopEnemySpawner()
+    clearEnemies()
     resetPower()
     loseLife()
     setCrankUI(false)
