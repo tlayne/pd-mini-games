@@ -3,21 +3,30 @@ import 'player'
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 
-class('Enemy').extends(gfx.sprite)
+class('Enemy').extends(AnimatedSprite)
 
 function Enemy:init(x, y, speed, direction)
-    local enemyImage = gfx.image.new("images/enemy")
-    assert( enemyImage )
+    local enemyTable = gfx.imagetable.new("images/enemy-table-32-32")
+    --local enemyImage = gfx.image.new("images/enemy")
+    --assert( enemyImage )
+    --below translates to sprite = AnimatedSprite.new(path)
+    Enemy.super.init(self, enemyTable)
 
-    self:setImage(enemyImage)
+    self:addState("exist", 1, 5, {tickStep = 2})
+    self:addState("cease", 6, 9, {tickStep = 2})
+    self:setDefaultState('exist')
+    self:playAnimation()
     self:moveTo(x, y)
-    self:setCollideRect(2, 2, 12, 12)
+    self:setCollideRect(6, 3, 23, 23)
     self.speed = speed
     self.direction = direction
     self:add()
 end
 
 function Enemy:update()
+    --required to update animation frames... duh
+    self:updateAnimation()
+    
     local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.direction, self.y +(self.speed * enemySpeedMultiplier))
 
 -- Collision Logic

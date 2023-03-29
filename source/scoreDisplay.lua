@@ -6,17 +6,17 @@ function createScoreDisplay()
     scoreSprite = gfx.sprite.new()
     score = 0
     scoreSprite:setCenter(0, 0)
-    scoreSprite:moveTo(320, 4)
+    scoreSprite:moveTo(310, 4)
     scoreSprite:add()
 end
 
 function updateDisplay()
 
-    -- Use this to set font but currently the font I created sucks
-    -- saira = gfx.font.new("assets/fonts/saira")
-    -- gfx.setFont(saira)
+    -- Use this to set font but currently this font has no : and I need one for SCORE: 10
+    grds = gfx.font.new("assets/fonts/grds")
+    gfx.setFont(grds)
 
-    local scoreText = 'Score: ' .. score
+    local scoreText = 'SCORE ' .. score
     local textWidth, textHeight = gfx.getTextSize(scoreText)
     local scoreImage = gfx.image.new(textWidth, textHeight)
     gfx.pushContext(scoreImage)

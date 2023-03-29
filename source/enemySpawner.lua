@@ -28,7 +28,7 @@ function spawnEnemy()
     local spawnDirection = math.random(-3, 3)
     local spawnSpeed = math.random(2, 5)
 
-    Enemy(spawnPosition, -20, spawnSpeed, spawnDirection)
+    Enemy(spawnPosition, -40, spawnSpeed, spawnDirection)
 end
 
 function stopEnemySpawner()

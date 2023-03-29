@@ -27,9 +27,14 @@ function Projectile:update()
             local collidedObject = collision['other']
 
             if collidedObject:isa(Enemy) then
-                kill:play()
-                collidedObject:remove()
                 self:remove()
+                kill:play()
+                collidedObject:forceNextAnimation(true, "cease")
+                collidedObject.speed = 0
+                collidedObject.direction = 0
+                killTimer = pd.timer.performAfterDelay(200, function()
+                    collidedObject:remove()
+                end)
                 incrementScore()
                 shipPower = shipPower + 1
                 if (shipPower == 5 or shipPower == 10 or shipPower == 20 or shipPower == 40) then

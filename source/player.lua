@@ -94,7 +94,7 @@ if (inputEnabled == true) then
     self:changeState("bankRight")
    end
    function pd.cranked(change, acceleratedChange)
-        if change > 180 then
+        if change > 1 then
             self:changeState("roll")
             powerDisplayUpdate()
         end
