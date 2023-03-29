@@ -11,6 +11,11 @@ function createScoreDisplay()
 end
 
 function updateDisplay()
+
+    -- Use this to set font but currently the font I created sucks
+    -- saira = gfx.font.new("assets/fonts/saira")
+    -- gfx.setFont(saira)
+
     local scoreText = 'Score: ' .. score
     local textWidth, textHeight = gfx.getTextSize(scoreText)
     local scoreImage = gfx.image.new(textWidth, textHeight)

@@ -94,7 +94,7 @@ if (inputEnabled == true) then
     self:changeState("bankRight")
    end
    function pd.cranked(change, acceleratedChange)
-        if change > 20 then
+        if change > 180 then
             self:changeState("roll")
             powerDisplayUpdate()
         end
@@ -130,6 +130,7 @@ function resetPlayer(playerReference)
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
             enableInput()
+            wyverWav:play()
             Player(200, 180)
             startEnemySpawner()
         else
