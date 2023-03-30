@@ -1,13 +1,19 @@
 local pd <const> = playdate
 local gfx <const> = pd.graphics
 local scoreSprite
+local scoreCount
 
 function createScoreDisplay()
     scoreSprite = gfx.sprite.new()
     score = 0
     scoreSprite:setCenter(0, 0)
-    scoreSprite:moveTo(310, 4)
+    scoreSprite:moveTo(345, 217)
     scoreSprite:add()
+
+    scoreCount = gfx.sprite.new()
+    scoreCount:setCenter(0, 0)
+    scoreCount:moveTo(356, 227)
+    scoreCount:add()
 end
 
 function updateDisplay()
@@ -16,13 +22,21 @@ function updateDisplay()
     grds = gfx.font.new("assets/fonts/grds")
     gfx.setFont(grds)
 
-    local scoreText = 'SCORE ' .. score
+    local scoreText = 'SCORE'
     local textWidth, textHeight = gfx.getTextSize(scoreText)
     local scoreImage = gfx.image.new(textWidth, textHeight)
     gfx.pushContext(scoreImage)
         gfx.drawText(scoreText, 0, 0)
     gfx.popContext()
     scoreSprite:setImage(scoreImage)
+
+    local scoreNumber = score    
+    local numberWidth, numberHeight = gfx.getTextSize(scoreNumber)
+    local numberImage = gfx.image.new(numberWidth, numberHeight)
+    gfx.pushContext(numberImage)
+        gfx.drawText(scoreNumber, 0, 0)
+    gfx.popContext()
+    scoreCount:setImage(numberImage)
 end
 
 function incrementScore()

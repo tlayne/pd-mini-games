@@ -32,7 +32,7 @@ function Player:update()
 -- Allow player movement with the D-pad if inputEnabled is true
 if (inputEnabled == true) then
    if playdate.buttonIsPressed( playdate.kButtonUp ) then
-       if (self.y > 160) then
+       if (self.y > 130) then
            self:moveBy( 0, -self.speed * shipSpeedMultiplier )
        end
    end
@@ -42,7 +42,7 @@ if (inputEnabled == true) then
        end
    end
    if playdate.buttonIsPressed( playdate.kButtonDown ) then
-       if (self.y < 210 ) then
+       if (self.y < 190 ) then
            self:moveBy( 0, self.speed * shipSpeedMultiplier )
        end
    end
