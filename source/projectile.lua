@@ -4,10 +4,15 @@ local gfx <const> = pd.graphics
 class('Projectile').extends(gfx.sprite)
 
 function Projectile:init(x, y, speed, direction)
+    -- I need to adjust the sizes here to make a with outline on the circle
     local projectileSize = 2
+    local outlineSize = 3
     local projectileImage = gfx.image.new(projectileSize * 2, projectileSize * 2)
     gfx.pushContext(projectileImage)
-        gfx.drawCircleAtPoint(projectileSize, projectileSize, projectileSize)
+        gfx.setColor(gfx.kColorWhite)
+        gfx.drawCircleAtPoint(outlineSize, outlineSize, outlineSize)
+        gfx.setColor(gfx.kColorBlack)
+        gfx.fillCircleAtPoint(projectileSize, projectileSize, projectileSize)
     gfx.popContext(projectileImage)
     self:setImage(projectileImage)
 

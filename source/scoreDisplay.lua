@@ -18,7 +18,6 @@ end
 
 function updateDisplay()
 
-    -- Use this to set font but currently this font has no : and I need one for SCORE: 10
     grds = gfx.font.new("assets/fonts/grds")
     gfx.setFont(grds)
 
