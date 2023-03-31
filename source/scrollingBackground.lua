@@ -1,10 +1,18 @@
 
 -- this will be for scrolling background
 --Just make it a sprite, place it in the background, and then move it down by how how fast you want to move it every frame.
-local backgroundImage = gfx.image.new(...)
-local backgroundSprite = gfx.sprite.new(backgroundImage)
-backgroundSprite:setCenter(0.5, 1.0)
-backgroundSprite:moveTo(200, 240)
+
+local pd <const> = playdate
+local gfx <const> = pd.graphics
+
+function setScrollingBackground(imageName1, imageName2)
+local backgroundImage1 = gfx.image.new( "images/" .. imageName1 )
+local backgroundImage2 = gfx.image.new("images/" .. imageName2)
+local backgroundSprite1 = gfx.sprite.new(backgroundImage1)
+local backgroundSprite2 = gfx.sprite.new(backgroundImage2)
+
+backgroundSprite:setCenter(0, 0)
+backgroundSprite:moveTo(0, 0)
 backgroundSprite:add()
 
 local _, backgroundHeight = backgroundSprite:getSize()
@@ -18,3 +26,16 @@ end
 
 --Something like that. I think the moving back code wouldn't work because it would look like it's snapping
 --which is why I think you'll either need to cut the background in half and have two sprites, or double the background to tile it.
+
+
+function setBackground(imageName)
+  -- Display a background image
+  local backgroundImage = gfx.image.new( "images/" .. imageName )
+  assert( backgroundImage )
+
+  gfx.sprite.setBackgroundDrawingCallback(
+      function( x, y, width, height )
+          backgroundImage:draw( 0, 0 )
+      end
+  )
+end
