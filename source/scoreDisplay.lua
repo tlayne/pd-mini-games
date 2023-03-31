@@ -29,6 +29,7 @@ function updateDisplay()
         gfx.drawText(scoreText, 0, 0)
     gfx.popContext()
     scoreSprite:setImage(scoreImage)
+    scoreSprite:setZIndex(6)
 
     local scoreNumber = score    
     local numberWidth, numberHeight = gfx.getTextSize(scoreNumber)
@@ -37,6 +38,7 @@ function updateDisplay()
         gfx.drawText(scoreNumber, 0, 0)
     gfx.popContext()
     scoreCount:setImage(numberImage)
+    scoreCount:setZIndex(6)
 end
 
 function incrementScore()

@@ -10,40 +10,46 @@ local bombSprite
 function createPowerDisplay()
     
     shipPower = 0
-    powerUpTable = gfx.imagetable.new("images/power-table-15-7")
+    powerUpTable = gfx.imagetable.new("images/power-table-22-30")
 
     powerSprite1 = gfx.sprite.new()
     powerSprite1:setImage( powerUpTable[1] )
+    powerSprite1:setZIndex(6)
     powerSprite1:setCenter(0, 0)
-    powerSprite1:moveTo(30, 230)
+    powerSprite1:moveTo(48, 210)
     powerSprite1:add()
 
     powerSprite2 = gfx.sprite.new()
     powerSprite2:setImage( powerUpTable[2] )
+    powerSprite2:setZIndex(6)
     powerSprite2:setCenter(0, 0)
-    powerSprite2:moveTo(30, 230)
+    powerSprite2:moveTo(48, 210)
 
     powerSprite3 = gfx.sprite.new()
     powerSprite3:setImage( powerUpTable[3] )
+    powerSprite3:setZIndex(6)
     powerSprite3:setCenter(0, 0)
-    powerSprite3:moveTo(30, 230)
+    powerSprite3:moveTo(48, 210)
 
     powerSprite4 = gfx.sprite.new()
     powerSprite4:setImage( powerUpTable[4] )
+    powerSprite4:setZIndex(6)
     powerSprite4:setCenter(0, 0)
-    powerSprite4:moveTo(30, 230)
+    powerSprite4:moveTo(48, 210)
 
     bombImage = gfx.image.new('images/bomb')
     bombSprite = gfx.sprite.new()
     bombSprite:setImage(bombImage)
+    bombSprite:setZIndex(6)
     bombSprite:setCenter(0, 0)
-    bombSprite:moveTo(50, 230)
+    bombSprite:moveTo(301, 210)
 
-    hudImage = gfx.image.new("images/hudDemo")
+    hudTable = gfx.imagetable.new("images/hud-table-400-30")
+
     hudSprite = gfx.sprite.new()
-    hudSprite:setImage(hudImage)
+    hudSprite:setImage(hudTable[1])
     hudSprite:setCenter(0, 0)
-    hudSprite:setZIndex(99)
+    hudSprite:setZIndex(5)
     hudSprite:moveTo(0, 210)
     hudSprite:add()
 end

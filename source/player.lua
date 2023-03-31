@@ -19,7 +19,7 @@ function Player:init(x, y)
     self:setDefaultState('idle')
     self:playAnimation()
     self:moveTo( x, y )
-    self:setCollideRect(5, 2, 22, 30)
+    self:setCollideRect(5, 2, 22, 26)
     self:add()
  
     self.speed = 4
