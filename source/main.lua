@@ -15,7 +15,7 @@ import "lifeDisplay"
 import "CoreLibs/crank"
 import "powerUp"
 import "soundController"
-import "scrollingBackground"
+import "backgroundScroller"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -46,7 +46,6 @@ function pd.update()
     gfx.sprite.update()
     pd.timer.updateTimers()
     pd.setCrankSoundsDisabled(true)
-
     -- turn on the crank indicator
     if crankStat == true then
         pd.ui.crankIndicator:update()

@@ -49,8 +49,8 @@ function setBackground(imageName)
     createLifeDisplay()
     createPowerDisplay()
     Player(200, 180)
-    startEnemySpawner()
     setScrollingBackground()
+    startEnemySpawner()
  end
 
  function setGameOverScene()

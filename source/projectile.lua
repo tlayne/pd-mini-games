@@ -4,18 +4,15 @@ local gfx <const> = pd.graphics
 class('Projectile').extends(gfx.sprite)
 
 function Projectile:init(x, y, speed, direction)
-    -- I need to adjust the sizes here to make a with outline on the circle
-    local projectileSize = 2
-    local outlineSize = 3
-    local projectileImage = gfx.image.new(projectileSize * 2, projectileSize * 2)
-    gfx.pushContext(projectileImage)
-        gfx.setColor(gfx.kColorWhite)
-        gfx.drawCircleAtPoint(outlineSize, outlineSize, outlineSize)
-        gfx.setColor(gfx.kColorBlack)
-        gfx.fillCircleAtPoint(projectileSize, projectileSize, projectileSize)
-    gfx.popContext(projectileImage)
-    self:setImage(projectileImage)
+    -- local projectileSize = 2
+    -- local projectileImage = gfx.image.new(projectileSize * 2, projectileSize * 2)
+    -- gfx.pushContext(projectileImage)
+    --     gfx.fillCircleAtPoint(projectileSize, projectileSize, projectileSize)
+    -- gfx.popContext(projectileImage)
+    bulletTable = gfx.imagetable.new("images/bullet-table-6-6")
+   
 
+    self:setImage(bulletTable[1])
     self:setCollideRect(0,0, self:getSize())
     self.direction = direction
     self.speed = speed
@@ -25,7 +22,7 @@ end
 
 function Projectile:update()
     local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.direction, self.y - self.speed)
-    
+
     -- Collision Logic
     if length > 0 then
         for index, collision in ipairs(collisions) do
