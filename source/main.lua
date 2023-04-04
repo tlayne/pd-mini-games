@@ -16,6 +16,7 @@ import "CoreLibs/crank"
 import "powerUp"
 import "soundController"
 import "backgroundScroller"
+import "hud"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -37,7 +38,7 @@ end
 function setCrankUI(boo)
     crankStat = boo
     if crankStat == true then
-        pd.ui.crankIndicator:start()
+        hudAlert()
     end
 end
 
@@ -47,7 +48,7 @@ function pd.update()
     pd.timer.updateTimers()
     pd.setCrankSoundsDisabled(true)
     -- turn on the crank indicator
-    if crankStat == true then
-        pd.ui.crankIndicator:update()
-    end
+    --if crankStat == true then
+      --  pd.ui.crankIndicator:update()
+    --end
 end

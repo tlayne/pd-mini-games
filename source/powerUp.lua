@@ -43,15 +43,6 @@ function createPowerDisplay()
     bombSprite:setZIndex(6)
     bombSprite:setCenter(0, 0)
     bombSprite:moveTo(301, 210)
-
-    hudTable = gfx.imagetable.new("images/hud-table-400-30")
-
-    hudSprite = gfx.sprite.new()
-    hudSprite:setImage(hudTable[1])
-    hudSprite:setCenter(0, 0)
-    hudSprite:setZIndex(5)
-    hudSprite:moveTo(0, 210)
-    hudSprite:add()
 end
 
 function useBomb()
