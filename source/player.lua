@@ -21,7 +21,7 @@ function Player:init(x, y)
     self:moveTo( x, y )
     self:setCollideRect(5, 2, 22, 26)
     self:add()
- 
+
     self.speed = 4
 end
 
@@ -93,7 +93,12 @@ if (inputEnabled == true) then
    if pd.buttonJustPressed(playdate.kButtonRight) then
     self:changeState("bankRight")
    end
-
+   if doABarrelRoll == true then
+    self:changeState('roll')
+    self.states.roll.onLoopFinishedEvent = function(self)
+        doABarrelRoll = false
+    end 
+   end
 --   function pd.cranked(change, acceleratedChange)
 --        if change > 1 then
 --            self:changeState("roll")
@@ -109,10 +114,6 @@ end
 
 function disableInput()
     inputEnabled = false
-end
-
-function doABarrelRoll(playerReference)
-    playerReference:changeState("roll")
 end
 
 function resetPlayer(playerReference)

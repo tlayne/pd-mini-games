@@ -8,8 +8,9 @@ local gfx <const> = pd.graphics
 
 class('Hud').extends(AnimatedSprite)
 
-function Hud:init(x, y)
+function Hud:init()
     local hudTable = gfx.imagetable.new("images/hud-table-400-30")
+  
     Hud.super.init(self,hudTable)
 
     self:addState("static", 1, 1)
@@ -20,7 +21,7 @@ function Hud:init(x, y)
     self:playAnimation()
     self:setCenter(0,0)
     self:setZIndex(5)
-    self:moveTo(x, y)
+    self:moveTo(0, 210)
     self:add()
 end
 
@@ -31,16 +32,20 @@ function Hud:update()
         self:changeState("alert")
     end
 
+    if (shipPower == 0) then
+        self:changeState('static')
+    end
+
 local rchange, accChange = pd.getCrankChange()
 
 --sprite.states.default.tickStep = 4 dynamically change tickStep
--- if accChange is > # set tickStep up
+-- if accChange is > # set tickStep up 2 to 5 is slow, 5 to 10 is medium, 10 + is fast?
 -- if accChange is < # set tickStep down
 
         if (rchange > 1 and crankStat) then
             setCrankUI(false)
             self:changeState("charge")
-            print("Charging started")
+            print(accChange)
         end
 
         if (rchange < 1 and crankStat == false) then
@@ -57,12 +62,19 @@ local rchange, accChange = pd.getCrankChange()
             self:resumeAnimation()
         end
 
+-- NOT WORKING YET        
+        if (self.currentState == self.states.charge) then
+            -- check state of enemy or collision?
+            print("decharge sound here")
+        end
+
     self.states.charge.onLoopFinishedEvent = function(self)
         self:changeState("static")
+        doABarrelRoll = true
         powerDisplayUpdate()
-        print("Charge complete")
     end 
 
+-- to get this to work I need a countdown from last time crank was turned. If it is too long change the animation to decelerate.
     self.states.decelerate.onLoopFinishedEvent = function(self)
         setCrankUI(true)
         print("Process restarted")

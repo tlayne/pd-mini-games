@@ -103,4 +103,5 @@ function powerDisplayUpdate()
             setCrankUI(false)
         end
     end
+    return true
 end
