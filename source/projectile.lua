@@ -39,7 +39,7 @@ function Projectile:update()
                 end)
                 incrementScore()
                 shipPower = shipPower + 1
-                if (shipPower == 5 or shipPower == 10 or shipPower == 20 or shipPower == 40) then
+                if ((shipPower >= 5 and powerLevel == "stage1") or (shipPower >= 10 and powerLevel == "stage2") or (shipPower >= 20 and powerLevel == "stage3") or (shipPower >= 40 and powerLevel == "stage4")) then
                     setCrankUI(true)
                     --crankyTimer = pd.timer.performAfterDelay(4200, function()
                     --    setCrankUI(false)

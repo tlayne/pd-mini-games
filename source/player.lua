@@ -93,12 +93,13 @@ if (inputEnabled == true) then
    if pd.buttonJustPressed(playdate.kButtonRight) then
     self:changeState("bankRight")
    end
-   function pd.cranked(change, acceleratedChange)
-        if change > 1 then
-            self:changeState("roll")
-            powerDisplayUpdate()
-        end
-   end
+
+--   function pd.cranked(change, acceleratedChange)
+--        if change > 1 then
+--            self:changeState("roll")
+--            powerDisplayUpdate()
+--        end
+--    end
 end
 end
 
@@ -108,6 +109,10 @@ end
 
 function disableInput()
     inputEnabled = false
+end
+
+function doABarrelRoll(playerReference)
+    playerReference:changeState("roll")
 end
 
 function resetPlayer(playerReference)

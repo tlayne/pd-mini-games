@@ -37,9 +37,9 @@ end
 
 function setCrankUI(boo)
     crankStat = boo
-    if crankStat == true then
-        hudAlert()
-    end
+    --if crankStat == true then
+        --hudAlert()
+    --end
 end
 
 function pd.update()
