@@ -17,6 +17,15 @@ function loadSounds()
 
     spinWav = sd.sample.new("sounds/spin")
     spin = sd.sampleplayer.new(spinWav)
+
+    dechargeWav = sd.sample.new("sounds/decharge")
+    decharge = sd.sampleplayer.new(dechargeWav)
+
+    specWav = sd.sample.new("sounds/special")
+    special = sd.sampleplayer.new(specWav)
+
+    alarmWav = sd.sample.new("sounds/alarm")
+    alarm = sd.sampleplayer.new(alarmWav)
 end
 
 
@@ -26,3 +35,8 @@ function loadMusic()
     wyverWav:setVolume(0.4)
     wyverWav:play(0)
 end
+
+function sampleVolume(sample, volume)
+    sample:setVolume(volume)
+end
+

@@ -118,6 +118,7 @@ end
 
 function resetPlayer(playerReference)
     disableInput()
+    powerCycle = false
     wyverWav:stop()
     splod:play()
     --playerReference:changeState("dead")
@@ -136,7 +137,7 @@ function resetPlayer(playerReference)
     padTimer = pd.timer.performAfterDelay(1200, function()
         if (lifeCount >= 0) then
             enableInput()
-            wyverWav:play()
+            wyverWav:play(0)
             Player(200, 180)
             startEnemySpawner()
         else

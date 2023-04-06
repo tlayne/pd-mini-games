@@ -39,11 +39,15 @@ function Projectile:update()
                 end)
                 incrementScore()
                 shipPower = shipPower + 1
-                if ((shipPower >= 5 and powerLevel == "stage1") or (shipPower >= 10 and powerLevel == "stage2") or (shipPower >= 20 and powerLevel == "stage3") or (shipPower >= 40 and powerLevel == "stage4" and bombCount == 0)) then
-                    setCrankUI(true)
-                    --crankyTimer = pd.timer.performAfterDelay(4200, function()
-                    --    setCrankUI(false)
-                    --end)
+                if (powerCycle == false) then
+                    if ((shipPower >= 5 and powerLevel == "stage1") or (shipPower >= 10 and powerLevel == "stage2") or (shipPower >= 20 and powerLevel == "stage3") or (shipPower >= 40 and powerLevel == "stage4" and bombCount == 0)) then
+                        --limite this function somehow? maybe another global?
+                        setCrankUI(true)
+                        alarm:play()
+                        --crankyTimer = pd.timer.performAfterDelay(4200, function()
+                        --    setCrankUI(false)
+                        --end)
+                    end
                 end
             end
         end
