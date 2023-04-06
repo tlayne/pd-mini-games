@@ -1,7 +1,6 @@
 -- issues
--- Still no barrel roll
--- charge resets on enemy kill because enemy collision causes crankstat to be true (maybe a good gameplay angle)
--- can't get decelerate to work, but perhaps if crank is idle for a time decelerate will kick in.
+-- associate tickstep of charge to acceleration of crank
+-- make the default charge time faster so it syncs better with the sound
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -81,7 +80,6 @@ function Hud:update()
         setCrankUI(true)
         alarm:play()
         powerCycle = false
-        print("Process restarted")
     end
 
     self.states.decelerate.onStateChangedEvent = function(self)
