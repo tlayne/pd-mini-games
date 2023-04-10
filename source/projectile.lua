@@ -32,8 +32,8 @@ function Projectile:update()
                 self:remove()
                 kill:play()
                 collidedObject:forceNextAnimation(true, "cease")
-                collidedObject.speed = 0
-                collidedObject.direction = 0
+                collidedObject.speed = collidedObject.speed * 0.25
+                --collidedObject.direction = 0
                 killTimer = pd.timer.performAfterDelay(200, function()
                     collidedObject:remove()
                 end)
@@ -58,7 +58,7 @@ function Projectile:update()
         self:remove()
     end
 end
-
+-- improve this to increase performance. I don't have to loop through to find them, I could just add them on INIT to a variable.
 function projectileLimit()
     local projectileActive = 0
     local allSprites = gfx.sprite.getAllSprites()

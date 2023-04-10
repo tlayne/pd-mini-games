@@ -15,7 +15,7 @@ function Hud:init()
 
     self:addState("static", 1, 1)
     self:addState("alert", 1, 4, {tickStep = 15, frames = {1,4}})
-    self:addState("charge", 4, nil, {tickStep = 3})
+    self:addState("charge", 4, nil, {tickStep = 2})
     self:addState("decelerate", 1, 38, {tickStep = 3, reverse = true})
     self:setDefaultState('static')
     self:playAnimation()
