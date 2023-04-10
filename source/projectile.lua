@@ -32,7 +32,7 @@ function Projectile:update()
                 self:remove()
                 kill:play()
                 collidedObject:forceNextAnimation(true, "cease")
-                collidedObject.speed = collidedObject.speed * 0.25
+                collidedObject.speed = collidedObject.speed * 0.75
                 --collidedObject.direction = 0
                 killTimer = pd.timer.performAfterDelay(200, function()
                     collidedObject:remove()
