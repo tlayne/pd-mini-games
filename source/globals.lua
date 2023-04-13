@@ -11,4 +11,9 @@ score = 0
 crankStat = false
 inputEnabled = true
 doABarrelRoll = false
+achievements = {
+    first = false,
+    second = false,
+    third = false
+}
 

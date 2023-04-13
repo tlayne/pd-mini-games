@@ -50,6 +50,10 @@ function Projectile:update()
                     end
                 end
             end
+
+            if collidedObject:isa(Crystal) then
+                print("DO STUFF HERE")
+            end
         end
     end
 
@@ -59,6 +63,7 @@ function Projectile:update()
     end
 end
 -- improve this to increase performance. I don't have to loop through to find them, I could just add them on INIT to a variable.
+-- also i can make an achievement based on projectiles fired after I fix this.
 function projectileLimit()
     local projectileActive = 0
     local allSprites = gfx.sprite.getAllSprites()

@@ -5,24 +5,25 @@ local gfx <const> = pd.graphics
 
 class('Crystal').extends(AnimatedSprite)
 
-function Crystal:init(x, y, speed, direction)
-    local crystalTable = gfx.imagetable.new("images/crystal-24-24")
+function Crystal:init(x, y, speed, direction, tier)
+    local crystalTable = gfx.imagetable.new("images/crystal-table-16-16")
     --local enemyImage = gfx.image.new("images/enemy")
     --assert( enemyImage )
     --below translates to sprite = AnimatedSprite.new(path)
     Crystal.super.init(self, crystalTable)
 
-    self:addState("pure", 1, 4, {tickStep = 2})
-    self:addState("cracked", 5, 9, {tickStep = 2})
-    self:addState("shattered", 5, 9, {tickStep = 2})
-    self:addState("data", 5, 9, {tickStep = 2})
-    self:addState("collect", 5, 9, {tickStep = 2})
+    self:addState("pure", 1, 1, {tickStep = 2})
+    self:addState("cracked", 2, 2, {tickStep = 2})
+    self:addState("shattered", 3, 3, {tickStep = 2})
+    self:addState("data", 4, 4, {tickStep = 2})
+    self:addState("collect", 5, 5, {tickStep = 2})
     self:setDefaultState('pure')
     self:playAnimation()
     self:moveTo(x, y)
-    self:setCollideRect(6, 3, 23, 23) -- (only set if state is data)
+    self:setCollideRect(0, 0, 16, 16) -- (only set if state is data)
     self.speed = speed
     self.direction = direction
+    self.tier = tier
     self:add()
 end
 
@@ -38,7 +39,13 @@ function Crystal:update()
             local collidedObject = collision['other']
 
             if collidedObject:isa(Player) then
-                print("get")
+                if self.currentState == "collect" then
+                    print("get")
+                else 
+                    function collidedObject:collisionResponse()
+                        return 'overlap'
+                    end
+                end
             end
         end
     end
@@ -49,6 +56,21 @@ function Crystal:update()
     end
 end
 
+
+function collectCrystal()
+
+
+end
+
+-- Clear all crystals from the screen
+function clearCrystals()
+    local allSprites = gfx.sprite.getAllSprites()
+    for index, sprite in ipairs(allSprites) do
+        if sprite:isa(Crystal) then
+            sprite:remove()
+        end
+    end
+end
 
 -- enemy collisions should overlap
 function Enemy:collisionResponse()
