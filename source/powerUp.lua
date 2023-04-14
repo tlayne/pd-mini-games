@@ -42,7 +42,7 @@ function createPowerDisplay()
     bombSprite:setImage(bombImage)
     bombSprite:setZIndex(6)
     bombSprite:setCenter(0, 0)
-    bombSprite:moveTo(301, 210)
+    bombSprite:moveTo(302, 210)
 end
 
 function useBomb()

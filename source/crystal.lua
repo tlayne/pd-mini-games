@@ -5,7 +5,7 @@ local gfx <const> = pd.graphics
 
 class('Crystal').extends(AnimatedSprite)
 
-function Crystal:init(x, y, speed, direction, tier)
+function Crystal:init(x, y, speed, tier)
     local crystalTable = gfx.imagetable.new("images/crystal-table-16-16")
     --local enemyImage = gfx.image.new("images/enemy")
     --assert( enemyImage )
@@ -22,8 +22,9 @@ function Crystal:init(x, y, speed, direction, tier)
     self:moveTo(x, y)
     self:setCollideRect(0, 0, 16, 16) -- (only set if state is data)
     self.speed = speed
-    self.direction = direction
     self.tier = tier
+    self.direction = 0.1
+    self:setZIndex(-1)
     self:add()
 end
 
@@ -39,8 +40,15 @@ function Crystal:update()
             local collidedObject = collision['other']
 
             if collidedObject:isa(Player) then
-                if self.currentState == "collect" then
-                    print("get")
+                if self.currentState == "data" then
+                    self:changeState("collect")
+                    self.direction = collidedObject.x
+                    self.speed = collidedObject.speed
+                    self.states.collect.onLoopFinishedEvent = function(self)
+                        self:remove()
+                        self.tier = true
+                        print(self.tier)
+                    end 
                 else 
                     function collidedObject:collisionResponse()
                         return 'overlap'

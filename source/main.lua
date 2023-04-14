@@ -17,6 +17,7 @@ import "powerUp"
 import "soundController"
 import "backgroundScroller"
 import "hud"
+import "crystalSpawner"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics
@@ -31,6 +32,8 @@ function resetGame()
     clearEnemies()
     stopEnemySpawner()
     startEnemySpawner()
+    stopCrystalSpawner()
+    startCrystalSpawner()
     enableInput()
     bombCount = 0
 end

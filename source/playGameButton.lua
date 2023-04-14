@@ -7,9 +7,12 @@ class('PlayGameButton').extends(gfx.sprite)
 -- I think the grid tutorial from squid will work nicely
 
 function PlayGameButton:init(x, y)
-    local playGameButtonImage = gfx.image.new("images/playGameMessage")
-    assert ( playGameButtonImage )
-    self:setImage(playGameButtonImage)
+    local gameButton = gfx.image.new(6, 6)
+    gfx.pushContext(gameButton)
+        gfx.setColor(gfx.kColorBlack)
+        gfx.fillTriangle(1, 1, 3, 3, 6, 6)
+    gfx.popContext(gameButton)
+    self:setImage(gameButton)
     self:moveTo(x, y)
     self:add()
 end

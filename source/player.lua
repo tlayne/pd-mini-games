@@ -129,7 +129,9 @@ function resetPlayer(playerReference)
     end)
     
     stopEnemySpawner()
+    stopCrystalSpawner()
     clearEnemies()
+    clearCrystals()
     resetPower()
     loseLife()
     setCrankUI(false)
@@ -140,6 +142,7 @@ function resetPlayer(playerReference)
             wyverWav:play(0)
             Player(200, 180)
             startEnemySpawner()
+            startCrystalSpawner()
         else
             setGameOverScene()
         end

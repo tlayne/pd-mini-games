@@ -17,14 +17,14 @@ function createLifeDisplay()
     lifeSprite1:setImage(lifeImage)
     lifeSprite1:setZIndex(6)
     lifeSprite1:setCenter(0, 0)
-    lifeSprite1:moveTo(0, 210)
+    lifeSprite1:moveTo(1, 210)
     lifeSprite1:add()
 
     lifeSprite2 = gfx.sprite.new(lifeImage)
     lifeSprite2:setImage(lifeImage)
     lifeSprite2:setZIndex(6)
     lifeSprite2:setCenter(0, 0)
-    lifeSprite2:moveTo(24, 210)
+    lifeSprite2:moveTo(25, 210)
     lifeSprite2:add()
 end
 

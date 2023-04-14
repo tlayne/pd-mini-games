@@ -36,7 +36,7 @@ function setBackground(imageName)
     gameState = 'start'
     clearSprites()
 
-    PlayGameButton(200,200)
+    PlayGameButton(16,144)
     setBackground('splashScreen')
  end
 
@@ -52,6 +52,7 @@ function setBackground(imageName)
     Hud()
     setScrollingBackground()
     startEnemySpawner()
+    startCrystalSpawner()
  end
 
  function setGameOverScene()
@@ -60,6 +61,7 @@ function setBackground(imageName)
     clearSprites()
 
     stopEnemySpawner()
-    PlayGameButton(200,200)
+    stopCrystalSpawner()
+    PlayGameButton(16,144)
     setBackground('endScreen')
  end

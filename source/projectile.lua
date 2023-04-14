@@ -52,7 +52,20 @@ function Projectile:update()
             end
 
             if collidedObject:isa(Crystal) then
-                print("DO STUFF HERE")
+                if collidedObject.currentState == "pure" then
+                    collidedObject:changeState("cracked")
+                    self:remove()
+                end
+                if collidedObject.currentState == "cracked" then
+                    collidedObject:changeState("shattered")
+                    self:remove()
+                end
+                if collidedObject.currentState == "shattered" or collidedObject.currentState == "data" then
+                    collidedObject:forceNextAnimation(true, "data")
+                    function collidedObject:collisionResponse()
+                        return 'overlap'
+                    end
+                end
             end
         end
     end
