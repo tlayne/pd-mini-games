@@ -37,6 +37,12 @@ function createPowerDisplay()
     powerSprite4:setCenter(0, 0)
     powerSprite4:moveTo(48, 210)
 
+    powerSprite5 = gfx.sprite.new()
+    powerSprite5:setImage( powerUpTable[5] )
+    powerSprite5:setZIndex(6)
+    powerSprite5:setCenter(0, 0)
+    powerSprite5:moveTo(48, 210)
+
     bombImage = gfx.image.new('images/bomb')
     bombSprite = gfx.sprite.new()
     bombSprite:setImage(bombImage)
@@ -94,6 +100,8 @@ function powerDisplayUpdate()
         setCrankUI(false)
     -- This triggers repeatedly upon reaching 40+ need to limit it somehow
     elseif (shipPower >= 40 and powerLevel == "stage4") then
+        powerSprite4:remove()
+        powerSprite5:add()
         if (bombCount == 0) then
             bombCount += 1
             spin:play()

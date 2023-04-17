@@ -35,8 +35,7 @@ function setBackground(imageName)
  function setStartingScene()
     gameState = 'start'
     clearSprites()
-
-    PlayGameButton(16,144)
+    PlayGameButton(35,150)
     setBackground('splashScreen')
  end
 
@@ -55,6 +54,20 @@ function setBackground(imageName)
     startCrystalSpawner()
  end
 
+ function setCollectScene()
+    gameState = 'collection'
+    clearSprites()
+    PlayGameButton(35,150)
+    setBackground('bgcheevo')
+ end
+
+ function setCreditsScene()
+    gameState = 'credits'
+    clearSprites()
+    PlayGameButton(35,150)
+    setBackground('bgcredits')
+ end
+
  function setGameOverScene()
     gameState = 'game over'
     lifeCount = 2
@@ -62,6 +75,6 @@ function setBackground(imageName)
 
     stopEnemySpawner()
     stopCrystalSpawner()
-    PlayGameButton(16,144)
+    PlayGameButton(35, 150)
     setBackground('endScreen')
  end

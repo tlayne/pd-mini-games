@@ -9,10 +9,10 @@ function Projectile:init(x, y, speed, direction)
     -- gfx.pushContext(projectileImage)
     --     gfx.fillCircleAtPoint(projectileSize, projectileSize, projectileSize)
     -- gfx.popContext(projectileImage)
-    bulletTable = gfx.imagetable.new("images/bullet-table-6-6")
+    bulletImage = gfx.image.new("images/bullet")
    
 
-    self:setImage(bulletTable[1])
+    self:setImage(bulletImage)
     self:setCollideRect(0,0, self:getSize())
     self.direction = direction
     self.speed = speed
