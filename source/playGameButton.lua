@@ -23,8 +23,8 @@ function PlayGameButton:update()
         function playdate.AButtonUp()
             if (gameState == 'start' or gameState ~= 'game') then
                 if self.y == 150 then
-                   setGameScene()
-                   resetGame()
+                    setGameScene()
+                    resetGame()
                 elseif self.y == 180 then
                     setCollectScene()
                 elseif self.y == 210 then

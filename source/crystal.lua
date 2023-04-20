@@ -35,6 +35,7 @@ function Crystal:update()
     local actualX, actualY, collisions, length = self:moveWithCollisions(self.x + self.direction, self.y + self.speed)
 
 -- Collision Logic
+-- Change to bracket notation as exampled in the discord
     if length > 0 then
         for index, collision in ipairs(collisions) do
             local collidedObject = collision['other']
@@ -46,13 +47,20 @@ function Crystal:update()
                     self.speed = collidedObject.speed
                     self.states.collect.onLoopFinishedEvent = function(self)
                         self:remove()
-                        self.tier = true
-                        print(self.tier)
+                       achievements[self.tier] = true
+                       saveAchieved()
+                        print(achievements.first)
                     end 
                 else 
                     function collidedObject:collisionResponse()
                         return 'overlap'
                     end
+                end
+            end
+
+            if collidedObject:isa(Enemy) then
+                function collidedObject:collisionResponse()
+                    return 'overlap'
                 end
             end
         end
@@ -80,7 +88,3 @@ function clearCrystals()
     end
 end
 
--- enemy collisions should overlap
-function Enemy:collisionResponse()
-    return 'overlap'
-end

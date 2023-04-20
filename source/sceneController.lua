@@ -54,6 +54,10 @@ function setBackground(imageName)
     startCrystalSpawner()
  end
 
+ function  setBossScene()
+   gameState = "boss battle"
+ end
+
  function setCollectScene()
     gameState = 'collection'
     clearSprites()
@@ -65,7 +69,11 @@ function setBackground(imageName)
     gameState = 'credits'
     clearSprites()
     PlayGameButton(35,150)
-    setBackground('bgcredits')
+    setBackground('credits')
+ end
+
+ function setVictoryScene()
+   gameState = "victory"
  end
 
  function setGameOverScene()

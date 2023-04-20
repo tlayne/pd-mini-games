@@ -144,6 +144,7 @@ function resetPlayer(playerReference)
             startEnemySpawner()
             startCrystalSpawner()
         else
+            saveScore(getScore())
             setGameOverScene()
         end
     end)

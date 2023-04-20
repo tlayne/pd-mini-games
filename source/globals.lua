@@ -1,4 +1,4 @@
---Global gamestate variable which indicates what stage the user is at (start, game, collection, credits, game over)
+--Global gamestate variable which indicates what stage the user is at (start, game, boss battle, collection, credits, victory, game over)
 gameState = 'start'
 -- Change ship speed upwards based on powering up without dying?
 shipSpeedMultiplier = 1
@@ -10,6 +10,7 @@ powerCycle = false
 powerLevel = "stage1"
 bombCount = 0
 score = 0
+bossCount = 0
 crankStat = false
 inputEnabled = true
 doABarrelRoll = false

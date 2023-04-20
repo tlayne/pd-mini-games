@@ -26,6 +26,8 @@ local gfx <const> = pd.graphics
 setStartingScene()
 
 function resetGame()
+    loadHighscore()
+    loadAchieved()
     resetScore()
     resetLife()
     resetPower()
