@@ -18,6 +18,7 @@ import "soundController"
 import "backgroundScroller"
 import "hud"
 import "crystalSpawner"
+import "achievementDisplay"
 
 local pd <const> = playdate
 local gfx <const> = pd.graphics

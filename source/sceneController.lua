@@ -62,7 +62,9 @@ function setBackground(imageName)
     gameState = 'collection'
     clearSprites()
     PlayGameButton(35,150)
-    setBackground('bgcheevo')
+    loadAchieved()
+    createAchievementDisplay()
+    updateAchievementDisplay()
  end
 
  function setCreditsScene()
