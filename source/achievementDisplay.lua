@@ -15,16 +15,23 @@ function createAchievementDisplay()
 
 end
 
--- This works! Still need to program for all achievements and update playGameButton
+-- This works! Still need to program for all achievement text
 -- The button needs to be drawn in white and rotated
 function updateAchievementDisplay()
 
-    print(achievements.first)
-    if (achievements.first == true) then
-        gfx.pushContext(cheevBg)
-            cheevImg:draw(46,67)
-        gfx.popContext()
-        cheevBgSprite:setImage(cheevBg)
+    local cheevXTable = {46, 79, 112, 145, 254, 303, 254, 303, 254, 303}
+    local cheevYTable = {67, 67, 67, 67, 64, 64, 97, 97, 130, 130}
+    local iter = 1
+    for achievement, boo in pairs(achievements) do
+        if (achievements[achievement] == true) then
+            cheevX = cheevXTable[iter]
+            cheevY = cheevYTable[iter]
+            gfx.pushContext(cheevBg)
+                cheevImg:draw(cheevX,cheevY)
+            gfx.popContext()
+            iter += 1
+        end
     end
+    cheevBgSprite:setImage(cheevBg)
 
 end
